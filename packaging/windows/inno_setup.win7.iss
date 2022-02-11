@@ -1,7 +1,7 @@
 ﻿; Give AppVer and SourceFolder from command line, eg:
 ; "C:\Program Files (x86)\Inno Setup 5\iscc" /dAppVer=1.13 /dSourceFolder=build inno_setup.iss 
 #define AppVer "0.0.10"
-#define InstallerPrefix "thonnyTN"
+#define InstallerPrefix "thonnyTN-3.7.6x86"
 #define SourceFolder "build"
 #define AppUserModelID "Thonny.Thonny"
 #define ThonnyPyProgID "Thonny.py"
@@ -19,9 +19,9 @@
 AppId=Thonny.tn
 AppName=Thonny pour Lycées Tunisiens
 AppVersion={#AppVer}
-AppVerName=ThonnyTN {#AppVer} - Selmen Edit
+AppVerName=ThonnyTN {#AppVer} - 3.7.6x86 Selmen Edit
 ;AppComments string is displayed on the "Support" dialog of the Add/Remove Programs Control Panel applet
-AppComments=Thonny est un editeur puython pour débutants , ceci est une version adapté aux lycées tunisiens.
+AppComments=Thonny est un editeur python pour débutants , ceci est une version adapté aux lycées tunisiens.
 AppPublisher=Selmen Arous
 AppPublisherURL=https://thonny.org
 AppSupportURL=https://thonny.org
@@ -29,15 +29,14 @@ AppUpdatesURL=https://thonny.org
 
 
 ; Actual privileges depend on how user started the installer
-;admin : to install drivers
 PrivilegesRequired=admin
 ;PrivilegesRequiredOverridesAllowed=commandline dialog
 ChangesAssociations=yes
-;Python 3.10 needs windows 8.1 at least
-MinVersion=6.3
+;Python 3.7.6 needs windows 7 at least
+MinVersion=6.1
 
 ; to install esp32 drivers
-ArchitecturesInstallIn64BitMode=x64 
+;ArchitecturesInstallIn64BitMode=x64 
 
 
 ; Will show important info on welcome page
@@ -125,7 +124,7 @@ Name: "{autodesktop}\Thonny"; Filename: "{app}\thonny.exe"; IconFilename: "{app}
 
 Name: "{autodesktop}\JupyterLab"; Filename: "{app}\python.exe ";Parameters: "-m jupyter lab"; IconFilename: "{app}\jupyter_app_icon_161280.ico"; Tasks: CreateJupyterIcon
 Name: "{autodesktop}\Designer Qt5"; Filename: "{app}\Lib\site-packages\qt5_applications\Qt\bin\designer.exe"; IconFilename: "{app}\Lib\site-packages\qt5_applications\Qt\bin\designer.exe"; Tasks: CreatePyQt5Icon
-Name: "{autodesktop}\Designer Qt6"; Filename: "{app}\Lib\site-packages\qt6_applications\Qt\bin\designer.exe"; IconFilename: "{app}\Lib\site-packages\qt6_applications\Qt\bin\designer.exe"; Tasks: CreatePyQt6Icon
+;Name: "{autodesktop}\Designer Qt6"; Filename: "{app}\Lib\site-packages\qt6_applications\Qt\bin\designer.exe"; IconFilename: "{app}\Lib\site-packages\qt6_applications\Qt\bin\designer.exe"; Tasks: CreatePyQt6Icon
 
 
 [Registry]
@@ -206,10 +205,12 @@ Root: HKA; Subkey: "Software\Classes\.ipynb\ShellNew";  ValueType: string; Value
 
 [Run]
 ;Filename: "{app}\pythonw.exe"; Parameters: "-m compileall ."; StatusMsg: "Compilation de bibliothèque standard... (prend du temps)"
-Filename: "{app}\pythonw.exe"; Parameters: """{app}\patch.py"" ""{app}\Scripts"" G:\dev\python\thonny\thonny\packaging\windows\py310 ""{app}"""; StatusMsg: "Patch des executables en cours  ... 1/2"
+;Filename: "{cmd}"; Parameters: "/k echo """"{app}\python.exe"" ""{app}\patch.py"" ""{app}\Scripts\"" G:\dev\python\thonny\thonny\packaging\windows\py376x86\ ""{app}"" >patch3.txt"; StatusMsg: "Patch des executables en cours  ... 1/2"
+
+Filename: "{app}\pythonw.exe"; Parameters: """{app}\patch.py"" ""{app}\Scripts"" G:\dev\python\thonny\thonny\packaging\windows\py376x86 ""{app}"""; StatusMsg: "Patch des executables en cours  ... 1/2"
 Filename: "{app}\pythonw.exe"; Parameters: """{app}\patch.py"" ""{app}\Scripts"" G:\dev\python\thonny\thonny\packaging\windows\build ""{app}"""; StatusMsg: "Patch des executables en cours  ... 2/2"
 
-Filename: {app}\drivers\dpinst64.exe; Parameters: "/S"; WorkingDir: {app}\drivers; StatusMsg: "Installation de pilote ESP32 ..."; Tasks:InstallESP32Driver
+Filename: "{app}\drivers\dpinst32.exe"; Parameters: "/S"; WorkingDir: {app}\drivers; StatusMsg: "Installation de pilote ESP32 ..."; Tasks:InstallESP32Driver
 
 
 [UninstallDelete]
@@ -388,7 +389,7 @@ begin
                               ESP32Page.SetProgress(103,103);
                           end
                           else 
-                              ESP32Page.SetText('Erreur' ,'Problème de flashage.') ;
+                              ESP32Page.SetText('Erreur' ,'Problème de flashage.ٍVeuillez rééssayer .' ) ;
                               
                      end;   
                         

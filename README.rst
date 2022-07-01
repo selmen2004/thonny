@@ -22,7 +22,11 @@ List of libraries included :
 - openpyxl: 3.0.9
 
 you can compile from sources or use binary distributions : 
+
 * 0.0.11 , win10+ : https://mega.nz/file/xpNGVA7K#mmqD1knEpJ8mLCmADaFsZFSTocsIT_pYPLr2u2is7M4
+
 * 0.0.10 , win10+ : https://mega.nz/file/p99y0SqT#fy5PE7RthCjqIPQ0ISKXZJc8eG4FzGsgK0LmecKf98Q
+
 * 0.0.10 , win7+ : https://mega.nz/file/p5FglJoL#m550dig4pUmtNsS5C4k0iAFVVku6qdZQCsnIbz9j0cs
+
 * 0.0.7 , win7+ : https://mega.nz/file/RwkSmLID#aap8sqFkHQHPI4LhoNd-R7SeVt2281Y5oeTBY4ZjivQ
